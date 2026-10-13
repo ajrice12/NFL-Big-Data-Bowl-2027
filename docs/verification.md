@@ -69,3 +69,13 @@ No research algorithm was replaced for this visual change. OL and receiver
 hypotheses remain separate. Field yard labels are visual context; the actual
 Combine scale is stated in source units because the dictionary is unverified.
 The live loopback server is retained for the user's viewing request.
+
+
+## V3 guided sports presentation
+
+The default entry is now a five-scene football story with Research Tools as an
+optional analytical mode. 52 new browser checks and all 64 research regression
+checks pass. The final runs have no normal-load script or asset failures.
+Source-export verification again confirms 480 attempts and five evidence
+objects. Screenshots and reports: `outputs/verification/v3/`. Full review and
+launch instructions: `docs/v3_review.md`. Research algorithms are unchanged.

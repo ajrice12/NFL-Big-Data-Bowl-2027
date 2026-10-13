@@ -1,7 +1,7 @@
 /* Start scripts.serve first. PLAYWRIGHT_MODULE_PATH may point to an existing install. */
 const fs=require('node:fs'),path=require('node:path');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE_PATH||'playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'outputs/verification/redesign');fs.mkdirSync(out,{recursive:true});
+const root=path.resolve(__dirname,'..'),out=path.join(root,'outputs/verification/v3/research-regression');fs.mkdirSync(out,{recursive:true});
 const base=process.env.PRESENTATION_URL||'http://127.0.0.1:8765/presentation/';
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.BROWSER_EXECUTABLE||'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',headless:true});
@@ -9,12 +9,12 @@ const base=process.env.PRESENTATION_URL||'http://127.0.0.1:8765/presentation/';
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
  page.on('request',r=>requests.push(r.url()));page.on('requestfailed',r=>failed.push(r.url()));page.on('response',r=>{if(r.status()>=400)failed.push(`${r.status()} ${r.url()}`)});
  const check=(value,label)=>{if(!value)throw Error(label);checks.push(label);};
- const nav=async id=>{await page.locator(`nav a[href="#${id}"]`).click();await page.locator(`[data-section="${id}"]`).waitFor();};
+ const nav=async id=>{await page.locator(`#chapters a[href="#${id}"]`).click();await page.locator(`[data-section="${id}"]`).waitFor();};
  const ready=async()=>{await page.locator('#play').waitFor();await page.waitForFunction(()=>!document.getElementById('play').disabled)};
  const screenshot=async name=>{await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(out,name),fullPage:true,animations:'disabled'});};
  try{
-  const start=Date.now();await page.goto(base,{waitUntil:'networkidle'});await page.locator('[data-section="overview"]').waitFor();const loadMs=Date.now()-start;
-  check(await page.locator('nav a').count()===5,'Five concise presentation sections');
+  const start=Date.now();await page.goto(base+'#overview',{waitUntil:'networkidle'});await page.locator('[data-section="overview"]').waitFor();const loadMs=Date.now()-start;
+  check(await page.locator('#chapters a').count()===5,'Five concise presentation sections');
   check((await page.locator('.overview').textContent()).includes('NO CLEAR ADDED VALUE'),'First screen states actual exploratory finding');
   check((await page.locator('.cohort-counts').textContent()).includes('21,363'),'First screen shows verified model-cohort opportunity count');
   check(requests.filter(u=>u.includes('/attempts/')).length===2,'Initial overview fetches only two featured attempts');

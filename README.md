@@ -23,31 +23,42 @@ raw CSV requests. Opening HTML by double-clicking does not provide the HTTP
 module/data loading the app needs. The old inline-preview scripts are archived
 under `scripts/legacy/` and are not the application entry point.
 
-Five sections form a short research briefing: **Overview, Player movement,
-How the metric works, Findings, and NFL application**. The first screen shows the
-question, candidate metric, 54-player model cohort, 21,363 NFL proxy opportunities,
-17 held-out athletes, and the inconclusive added-value finding beside actual
-Combine movement.
+The default view is a five-scene football story: **The football problem,
+Player Film, Measure the reset, NFL findings, and Scouting implications**.
+A short title sequence introduces the question with **Watch the Breakdown** as
+the main action. Back, Next and Skip to Results guide a self-paced briefing of
+about 60-90 seconds. There is no mandatory loading sequence.
 
-The field viewer uses an original code-drawn football practice field, compact
-player labels and live speed/acceleration readouts. Compare two real attempts in
-overlay or side by side. Play/pause, replay, scrub time, change speed, select drills,
-and inspect reversal/recovery markers and the synchronized speed chart. Rookie
-NFL rates and explicit opportunity denominators appear directly alongside film.
-The Metric section steps through an observed reversal and its recovery target;
-15%, 20% and 25% definitions use actual exported measurements.
+Player Film opens a verified O'Cyrus Torrence mirror attempt without filters.
+The first recorded direction change receives a brief quarter-speed replay and
+annotation; the clock still shows source time. Compare Players lazily loads
+Steve Avila into synchronized split fields. Play/pause, replay and scrubbing
+remain available. The reset scene reveals the first-event 0.60-second delay
+only once its target is reached. These prespecified guard examples were selected
+without NFL outcomes and are descriptive illustrations.
+
+**Research Tools** retains all five analytical workspaces: Overview, Player
+movement, How the metric works, Findings, and NFL application. Filters, drills,
+trail encodings, the time series, 15/20/25% targets, the data appendix, all nine
+methodology steps, model comparisons, uncertainty, sensitivity and diagnostics
+remain available. OL pressure-rate and receiver-separation experiments stay
+separate. No research algorithm or fitted model was changed.
 
 Field markings are **schematic**, not recorded NFL field placement. Coordinate
-units remain unverified. A source-unit scale bar and shared isotropic mapping
+units remain unverified. The source-unit scale and shared isotropic mapping
 preserve geometry; starts are translated, never rotated or interpolated. Gaps
-break trails. NFL outcomes are descriptive and do not validate the movement score.
-Detailed samples and nine-method explanations are secondary expandable appendices.
+break trails. The primary OL model predicts any-pressure rate, rather than
+survival through three seconds. It does not validate a movement score.
 
-Startup reads a 24.8 KB `briefing.json` and the two featured attempts, not all 480
-trajectories. `catalog.json` loads when entering Movement; individual attempt
-files load only when selected and are reused in memory. Missing briefing, model
-outputs or selected attempts show explicit incomplete/unavailable states. Previous
-chapter URLs such as `#laboratory` redirect to the corresponding new section.
+Startup reads the 24.8 KB briefing and **one** featured attempt. Other athletes,
+the catalog and samples load on demand. Fonts are served locally with their
+SIL Open Font Licenses; see `presentation/assets/README.md`. The header uses a
+typographic NFL fallback and an independent-research label. Reduced motion
+disables automatic playback and transitions. Existing research hash links work.
+
+`tests/story-browser.cjs` verifies the guided experience and
+`tests/browser.cjs` retains the complete research browser regression suite.
+Latest screenshots and reports are local in `outputs/verification/v3/`.
 
 ## Setup and reproduce
 
