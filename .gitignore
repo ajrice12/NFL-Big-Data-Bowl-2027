@@ -7,3 +7,12 @@ outputs/figures/*
 outputs/animations/*
 outputs/results/*
 !**/.gitkeep
+outputs/checkpoints/
+outputs/archive/
+outputs/research/
+outputs/presentation/
+outputs/verification/
+presentation/data/
+presentation/assets/generated/
+*.log
+notebook_reproduction/

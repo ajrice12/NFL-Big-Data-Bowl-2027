@@ -1,4 +1,4 @@
-"""Fail on duplicate keys, invalid speeds, or contaminated outcome cohorts."""
+"""Check basic keys and ranges; extended cohort checks live in scripts.research_checks."""
 import pandas as pd
 from src.load_data import PROCESSED, ROOT
 

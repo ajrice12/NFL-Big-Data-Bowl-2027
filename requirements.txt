@@ -5,3 +5,4 @@ scikit-learn>=1.5,<2
 matplotlib>=3.9,<4
 pillow>=10,<13
 jupyterlab>=4,<5
+scipy>=1.13,<2
