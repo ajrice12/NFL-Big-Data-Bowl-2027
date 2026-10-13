@@ -8,9 +8,13 @@ and copyright notices are included beside its binary in `fonts/`.
 - [Oswald variable](https://github.com/google/fonts/tree/main/ofl/oswald): upstream `Oswald[wght].ttf`, locally named `Oswald-wght.ttf`; `oswald-OFL.txt`.
 - [Inter variable](https://github.com/google/fonts/tree/main/ofl/inter): upstream `Inter[opsz,wght].ttf`, locally named `Inter-opsz-wght.ttf`; `inter-OFL.txt`.
 
-The original practice-drill board and conceptual blocking diagrams use no downloaded broadcast footage, logos,
-photographs or reference-image assets. NFL is plain text in the header. The
-official shield was not included: permission for this deployment has not been
-established, and the [NFL terms](https://www.nfl.com/legal/terms/) require express
-permission for trademark use. This implements the brief's typographic fallback,
-with an independent competition research label. It does not assert endorsement.
+The original practice-drill board and conceptual blocking diagrams use no downloaded broadcast footage or reference photographs.
+
+The header's top-right NFL shield is the authentic, unmodified SVG used by the
+official NFL.com application shell, added at the user's explicit request:
+https://static.www.nfl.com/image/upload/v1592261021/league/koydwwbbgox0dcbzamz1.svg
+
+The independent competition research label remains visible. The asset is a
+third-party NFL trademark; including it does not assert endorsement or grant
+ownership or a general redistribution license. Player portraits remain in the
+local ignored cache; their sources are documented separately.
