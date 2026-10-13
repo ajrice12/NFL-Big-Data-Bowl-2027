@@ -10,9 +10,9 @@ and copyright notices are included beside its binary in `fonts/`.
 
 The original practice-drill board and conceptual blocking diagrams use no downloaded broadcast footage or reference photographs.
 
-The header's top-right NFL shield is the authentic, unmodified SVG used by the
+The header's top-right NFL shield is the authentic, unmodified image used by the
 official NFL.com application shell, added at the user's explicit request:
-https://static.www.nfl.com/image/upload/v1592261021/league/koydwwbbgox0dcbzamz1.svg
+https://static.www.nfl.com/image/private/f_auto,h_36,dpr_2.0,q_auto,w_36/league/kj8ogg7lzgfzis9i98xy
 
 The independent competition research label remains visible. The asset is a
 third-party NFL trademark; including it does not assert endorsement or grant
