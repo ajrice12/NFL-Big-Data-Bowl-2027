@@ -13,7 +13,7 @@ class Handler(SimpleHTTPRequestHandler):
         if path=='/':
             self.send_response(302);self.send_header('Location','/presentation/');self.end_headers();return
         candidate=(ROOT/path.lstrip('/')).resolve()
-        allowed=[ROOT/'presentation',ROOT/'outputs/figures',ROOT/'outputs/animations']
+        allowed=[ROOT/'presentation',ROOT/'outputs/figures',ROOT/'outputs/animations',ROOT/'outputs/presentation']
         permitted=any(candidate.is_relative_to(p.resolve()) for p in allowed) or candidate==(ROOT/'outputs/presentation/research.json').resolve()
         if not permitted:
             self.send_error(404,'Not a presentation asset');return

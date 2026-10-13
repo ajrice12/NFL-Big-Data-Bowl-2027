@@ -23,13 +23,31 @@ raw CSV requests. Opening HTML by double-clicking does not provide the HTTP
 module/data loading the app needs. The old inline-preview scripts are archived
 under `scripts/legacy/` and are not the application entry point.
 
-Eight chapters cover the problem, actual data, movement lab, nine algorithms,
-NFL outcomes, model findings, reproducibly chosen case studies, and conclusions.
-The lab provides real athlete/attempt and drill selection, two-athlete playback,
-pause/restart, time scrubbing, speed controls, trails, speed/acceleration colors,
-reversal/recovery markers, and synchronized time-series cursors. Coordinates are
-translated to common starts, never rotated or interpolated. Gaps break trails.
-Missing data produces an explicit error with rebuild instructions.
+Five sections form a short research briefing: **Overview, Player movement,
+How the metric works, Findings, and NFL application**. The first screen shows the
+question, candidate metric, 54-player model cohort, 21,363 NFL proxy opportunities,
+17 held-out athletes, and the inconclusive added-value finding beside actual
+Combine movement.
+
+The field viewer uses an original code-drawn football practice field, compact
+player labels and live speed/acceleration readouts. Compare two real attempts in
+overlay or side by side. Play/pause, replay, scrub time, change speed, select drills,
+and inspect reversal/recovery markers and the synchronized speed chart. Rookie
+NFL rates and explicit opportunity denominators appear directly alongside film.
+The Metric section steps through an observed reversal and its recovery target;
+15%, 20% and 25% definitions use actual exported measurements.
+
+Field markings are **schematic**, not recorded NFL field placement. Coordinate
+units remain unverified. A source-unit scale bar and shared isotropic mapping
+preserve geometry; starts are translated, never rotated or interpolated. Gaps
+break trails. NFL outcomes are descriptive and do not validate the movement score.
+Detailed samples and nine-method explanations are secondary expandable appendices.
+
+Startup reads a 24.8 KB `briefing.json` and the two featured attempts, not all 480
+trajectories. `catalog.json` loads when entering Movement; individual attempt
+files load only when selected and are reused in memory. Missing briefing, model
+outputs or selected attempts show explicit incomplete/unavailable states. Previous
+chapter URLs such as `#laboratory` redirect to the corresponding new section.
 
 ## Setup and reproduce
 
@@ -52,6 +70,7 @@ python -m src.ol_models
 python -m src.ol_sensitivity
 python -m scripts.research_checks
 python -m scripts.build_presentation
+python -m scripts.verify_presentation_export
 python -m visualizations.research_figures
 python -m visualizations.comparison_export
 python -m scripts.serve --port 8765
@@ -115,8 +134,9 @@ Edge. Set `BROWSER_EXECUTABLE` to another Chromium executable,
 `PLAYWRIGHT_MODULE_PATH` to an existing Playwright module, and
 `PRESENTATION_URL` to override the test URL. It writes its actual status and
 screenshots to `outputs/verification/`. A failed check exits nonzero. The suite
-covers chapters, playback/pause/scrub/restart, athletes/drills, data samples,
-algorithm controls, result hypotheses, mobile overflow, missing export handling,
+covers all five sections, playback/pause/scrub/replay, athletes/drills, data samples,
+metric event/target controls, both result hypotheses, desktop/laptop/mobile overflow,
+on-demand loading, missing briefing/model/attempt handling,
 console/resource errors, and refusal to serve original CSVs.
 
 `verify_notebook` executes the embedded code in a fresh local reproduction
@@ -135,11 +155,13 @@ public output bundle; review allowed figures and competition rules separately.
 - `notebooks/kaggle_submission.ipynb`: self-contained, output-free reproduction notebook.
 - `docs/technical_audit.md`: development checkpoint, original defects and changes.
 - `docs/research_protocol.md`: operational definitions, assumptions and validation design.
+- `docs/redesign_review.md`: presentation audit, five-section design and verification.
 - `writeup/draft.md`: concise scientific Writeup draft with five figure references.
 
 Generated files remain local and ignored: `outputs/research/` holds analysis
-reports; `outputs/presentation/research.json` contains restricted local trajectory
-examples; `outputs/figures/` contains five 240-dpi PNG/SVG figures;
+reports; `outputs/presentation/` contains restricted local exports (`briefing.json`,
+`catalog.json`, `appendix.json`, individual `attempts/` files, and the retained
+full `research.json` for scientific exporters); `outputs/figures/` contains five 240-dpi PNG/SVG figures;
 `outputs/animations/mirror_comparison.gif` is a 10-fps real-frame comparison;
 `outputs/verification/` contains checks, screenshots and execution logs. Earlier
 results/presentation are preserved in `outputs/checkpoints/pre-overhaul/` and Git

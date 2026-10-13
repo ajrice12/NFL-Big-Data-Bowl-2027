@@ -34,3 +34,38 @@ for the requested live viewing session; stop its terminal with Ctrl+C.
 These checks verify implementation and local reproducibility. They do not
 validate LRE's football interpretation, independent repeatability, survival
 assumptions, or competition publication permissions.
+
+## Football presentation redesign verification
+
+The five-section redesign was verified on 2026-10-12 EDT / 2026-10-13 UTC.
+The original eight-section screenshots and reports are preserved locally; latest
+artifacts are in `outputs/verification/redesign/`.
+
+- **64 browser checks passed** in real Edge/Playwright, with zero normal-load
+  JavaScript/console errors or failed resource requests. All five sections were
+  checked at 1366×768, 1920×1080, 1280×800 and 390×844 without page overflow.
+- The first screen exposes the cohort counts and main finding without scrolling.
+  Startup fetches a 24,832-byte briefing and two selected trajectory files, not
+  the full 480-attempt bundle, catalog or sample appendix. One measured local
+  browser startup was 614 ms; that is an observation, not a performance guarantee.
+- Actual names, NFL IDs, attempt IDs and scrubbed frame timestamps match source
+  metadata. Overlay/split fields, replay, speed, trail encodings, and metric
+  reversal/target controls passed. Isotropic shared scale and translation-only
+  geometry were checked; a synthetic gap test confirms no interpolation.
+- Missing briefing, missing OL model results and unavailable selected tracking
+  each produce explicit incomplete/unavailable states. Playback disables when
+  the selected tracking cannot load. Raw CSV requests remain blocked.
+- **All 480 trajectory exports** were compared against processed x/y/s and
+  timestamps. Five evidence objects match the rounded source JSON reports.
+  The full research pipeline reproduced all five analysis reports unchanged.
+- The eight research edge-case tests and ten cohort/output checks still pass.
+  The rebuilt self-contained notebook completed all eight executable cells
+  locally; all five analysis reports matched again. Kaggle runtime is untested.
+- Screenshots of Overview, Movement, Metric, Findings and Application were
+  captured and visually inspected. Reference assets and official/team logos
+  were not copied. The field is an original code-drawn schematic.
+
+No research algorithm was replaced for this visual change. OL and receiver
+hypotheses remain separate. Field yard labels are visual context; the actual
+Combine scale is stated in source units because the dictionary is unverified.
+The live loopback server is retained for the user's viewing request.

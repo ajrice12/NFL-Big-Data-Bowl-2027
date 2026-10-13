@@ -89,7 +89,24 @@ def main():
              'provenance':{str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files}}
     destination=ROOT/'outputs/presentation';destination.mkdir(parents=True,exist_ok=True)
     (destination/'research.json').write_text(json.dumps(safe(payload),separators=(',',':'),allow_nan=False),encoding='utf-8')
-    print(f'Exported {len(trajectories)} actual attempts to ignored local research.json')
+    # Compact browser entry point: frames are fetched only for selected attempts.
+    outcomes=pd.read_parquet(PROCESSED/'ol/outcomes.parquet').set_index('nfl_id').to_dict(orient='index')
+    attempts_dir=destination/'attempts';attempts_dir.mkdir(exist_ok=True)
+    catalog=[]
+    for trajectory in trajectories:
+        filename=hashlib.sha256(trajectory['id'].encode()).hexdigest()[:20]+'.json'
+        trajectory['nfl']=outcomes.get(trajectory['nfl_id'])
+        (attempts_dir/filename).write_text(json.dumps(safe(trajectory),separators=(',',':'),allow_nan=False),encoding='utf-8')
+        item={k:v for k,v in trajectory.items() if k not in ['frames','reversals']}
+        item['file']='attempts/'+filename;item['frame_count']=len(trajectory['frames'])
+        catalog.append(item)
+    briefing={k:v for k,v in payload.items() if k not in ['trajectories','samples','worked_examples']}
+    briefing['schema_version']=2
+    briefing['featured_attempts']=[next(t for t in catalog if t['nfl_id']==c['nfl_id'] and t['drill']=='PASS_PRO_MIRROR_DRILL') for c in cases]
+    briefing['model_opportunities']=ol_report['train_opportunities']+ol_report['test_opportunities']
+    for filename,value in [('briefing.json',briefing),('catalog.json',catalog),('appendix.json',{'samples':samples,'worked_examples':worked})]:
+        (destination/filename).write_text(json.dumps(safe(value),separators=(',',':'),allow_nan=False),encoding='utf-8')
+    print(f'Exported {len(trajectories)} local attempts; compact briefing plus on-demand trajectory files.')
 
 
 if __name__=='__main__':main()
