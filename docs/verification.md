@@ -92,3 +92,14 @@ screenshots were reviewed. The sixty-second comprehension judgment is editorial,
 not a participant study. See `docs/question_review_verification.md` and local
 `outputs/verification/question-review/` screenshots/reports. All 480 exported
 trajectories still match processed source data.
+
+
+## Season portraits, practice surface and timer
+
+The local portrait cache matches 480 of 510 players to historical rookie-season
+roster URLs by NFL tracking ID. Thirty unavailable records use labeled initials.
+Photo capture dates are not verified. Images are local outputs, not public Git
+assets. 26 dedicated portrait/timer browser checks pass alongside the 63 guided
+story and 64 research checks. Screenshots at 1440x900 and 1366x768 were reviewed.
+All 480 portrait files were decoded, hashed and compared with their season
+roster URL/ID records. See `docs/portrait_visual_review.md` for source and scope.

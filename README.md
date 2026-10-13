@@ -56,6 +56,23 @@ Reduced motion disables automatic playback and transitions. Existing research
 hash URLs work. Browser tests: `tests/story-browser.cjs` and `tests/browser.cjs`.
 Latest screenshots/reports: `outputs/verification/question-review/`.
 
+Player labels now include matching rookie-season roster portraits, with initials
+when the historical roster has no usable photo. Run the optional local cache
+builder after generating the presentation export:
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.build_portraits
+```
+
+This requires network access to nflverse historical rosters and their image
+sources. The local cache currently contains 480 of 510 players. Exact capture
+dates are unverified: season labels identify roster association, not a guaranteed
+photo shoot date. Images and roster snapshots remain in ignored local outputs.
+Photo pickers, model-player lists and data tables use the same identity mapping.
+The practice animation has textured turf, schematic white paint/hash markings,
+shadowed equipment and larger synchronized elapsed-time clocks. Geometry and
+models are unchanged. `tests/portraits-browser.cjs` verifies the new interactions.
+
 ## Setup and reproduce
 
 Python 3.11+ and several GB of RAM are recommended. Obtain the official dataset

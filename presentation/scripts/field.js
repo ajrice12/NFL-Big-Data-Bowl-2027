@@ -1,3 +1,4 @@
+import {canvasPortrait} from './portraits.js';
 /* Actual Combine traces on a practice board; illustrative grid/equipment only. */
 export const ATHLETE_COLORS=['#ffffff','#f2c94c'];
 export function geometry(tracks,width=1200,height=580){
@@ -12,17 +13,21 @@ export function observedFrame(track,elapsed){
  while(index+1<fs.length&&fs[index+1][0]-t0<=elapsed+1e-7)index++;
  return index;
 }
-function field(ctx,w,h){
- ctx.fillStyle='#173b2f';ctx.fillRect(0,0,w,h);
- ctx.fillStyle='#1e4435';ctx.fillRect(35,40,w-70,h-80);
- ctx.strokeStyle='#dce8df22';ctx.lineWidth=1;
- for(let x=70;x<w-35;x+=55){ctx.beginPath();ctx.moveTo(x,60);ctx.lineTo(x,h-60);ctx.stroke();}
- for(let y=65;y<h-40;y+=55){ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-55,y);ctx.stroke();}
- ctx.strokeStyle='#dce8df77';ctx.lineWidth=2;ctx.strokeRect(35,40,w-70,h-80);
- // Equipment symbols indicate a practice setting, not surveyed cone locations.
- [[65,75],[w-65,75],[65,h-75],[w-65,h-75]].forEach(([x,y])=>{ctx.fillStyle='#ed8a45';ctx.beginPath();ctx.moveTo(x,y-12);ctx.lineTo(x+11,y+8);ctx.lineTo(x-11,y+8);ctx.closePath();ctx.fill();ctx.fillRect(x-14,y+8,28,3);});
- ctx.fillStyle='#e8efea';ctx.font='bold 18px Arial';ctx.textAlign='left';ctx.fillText('COMBINE / PRACTICE DRILL DIAGRAM',38,25);
- ctx.font='13px Arial';ctx.fillStyle='#b8cdbf';ctx.textAlign='right';ctx.fillText('GRID & CONES ILLUSTRATIVE / NOT MEASURED PLACEMENT',w-40,25);ctx.textAlign='left';
+const surfaces=new Map();
+function field(output,w,h){
+ const key=`${w}-${h}`;if(surfaces.has(key)){output.drawImage(surfaces.get(key),0,0);return;}
+ const surface=document.createElement('canvas');surface.width=w;surface.height=h;const ctx=surface.getContext('2d');
+ const grass=ctx.createLinearGradient(0,0,w,h);grass.addColorStop(0,'#244d35');grass.addColorStop(.48,'#326747');grass.addColorStop(1,'#173d2a');ctx.fillStyle=grass;ctx.fillRect(0,0,w,h);
+ for(let x=38;x<w-38;x+=80){ctx.fillStyle=Math.round(x/80)%2?'#ffffff07':'#061b120b';ctx.fillRect(x,42,80,h-84);}
+ // Fixed texture and paint are rendered once per canvas size, not every animation frame.
+ for(let i=0;i<5000;i++){const x=(i*127.73)%w,y=(i*63.41)%h;ctx.fillStyle=i%2?'#b5d0a613':'#071d151b';ctx.fillRect(x,y,1,3);}
+ ctx.fillStyle='#0a1b16';ctx.fillRect(0,0,w,39);ctx.fillRect(0,h-30,w,30);
+ ctx.shadowColor='#0009';ctx.shadowBlur=12;ctx.strokeStyle='#dce8dd';ctx.lineWidth=4;ctx.strokeRect(39,48,w-78,h-92);ctx.shadowBlur=0;
+ for(let x=120;x<w-65;x+=80){ctx.strokeStyle='#eef3df80';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,49);ctx.lineTo(x,h-45);ctx.stroke();
+  for(let j=1;j<5;j++){const hx=x+16*j;if(hx>w-45)continue;ctx.strokeStyle='#eff5e8bb';ctx.lineWidth=2;ctx.beginPath();[[51,64],[h-61,h-46],[h*.36,h*.36+9],[h*.64-9,h*.64]].forEach(([a,b])=>{ctx.moveTo(hx,a);ctx.lineTo(hx,b);});ctx.stroke();}}
+ [[68,78],[w-68,78],[68,h-78],[w-68,h-78]].forEach(([x,y])=>{ctx.fillStyle='#071a15aa';ctx.beginPath();ctx.ellipse(x+5,y+13,22,7,0,0,Math.PI*2);ctx.fill();const cone=ctx.createLinearGradient(x-10,y,x+10,y);cone.addColorStop(0,'#b64b14');cone.addColorStop(.45,'#ffc76b');cone.addColorStop(1,'#e77926');ctx.fillStyle=cone;ctx.beginPath();ctx.moveTo(x,y-15);ctx.lineTo(x+12,y+10);ctx.lineTo(x-12,y+10);ctx.closePath();ctx.fill();ctx.fillStyle='#fa9b42';ctx.fillRect(x-16,y+9,32,5);ctx.fillStyle='#ffffffaa';ctx.fillRect(x-5,y-1,10,3);});
+ ctx.fillStyle='#f0f3e9';ctx.font='bold 18px Arial';ctx.textAlign='left';ctx.fillText('COMBINE / PRACTICE SURFACE',40,26);ctx.font='12px Arial';ctx.fillStyle='#b8cdbf';ctx.textAlign='right';ctx.fillText('ILLUSTRATIVE PAINT & EQUIPMENT / NOT SURVEYED',w-40,25);ctx.textAlign='left';
+ surfaces.set(key,surface);output.drawImage(surface,0,0);
 }
 export function drawField(canvas,tracks,elapsed,{ghost=false,encoding='athlete',focus=false,only=null}={}){
  const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;field(ctx,w,h);
@@ -51,9 +56,10 @@ export function drawField(canvas,tracks,elapsed,{ghost=false,encoding='athlete',
    if(focus){const axis=[t.summary.axis_x,t.summary.axis_y],r=recent,original=fs[r.index];const target=[...original];target[1]+=axis[0]*r.direction*r.target_displacement;target[2]+=axis[1]*r.direction*r.target_displacement;const [x,y]=point(t,target),vx=axis[1]*18,vy=axis[0]*18;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x-vx,y-vy);ctx.lineTo(x+vx,y+vy);ctx.stroke();ctx.setLineDash([]);ctx.font='bold 15px Arial';ctx.fillStyle='#f2c94c';ctx.fillText('RESET TARGET',x+23,y+43);}
   }
   const [x,y]=point(t,f);ctx.fillStyle='#092219';ctx.beginPath();ctx.ellipse(x,y+10,16,6,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,12,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#101b17';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#101b17';ctx.textAlign='center';ctx.font='bold 13px Arial';ctx.fillText(ath?'B':'A',x,y+4);ctx.textAlign='left';
-  const name=t.name.split(' ').at(-1).toUpperCase(),label=`${name}  ${t.position}`;ctx.font='bold 16px Arial';const tw=ctx.measureText(label).width+18,ly=y+(ath?39:-27),lx=Math.min(w-120-tw,Math.max(115,ath?x-tw-22:x+22));ctx.fillStyle='#101a17';ctx.fillRect(lx,ly-18,tw,25);ctx.fillStyle=color;ctx.fillText(label,lx+8,ly);
+  const name=t.name.split(' ').at(-1).toUpperCase(),label=`${name}  ${t.position}`;ctx.font='bold 16px Arial';const tw=ctx.measureText(label).width+54,ly=y+(ath?39:-27),lx=Math.min(w-120-tw,Math.max(115,ath?x-tw-22:x+22));ctx.fillStyle='#101a17';ctx.fillRect(lx,ly-22,tw,34);const photo=canvasPortrait(t.nfl_id,t.year);if(photo){ctx.save();ctx.beginPath();ctx.arc(lx+19,ly-5,15,0,Math.PI*2);ctx.clip();ctx.fillStyle='#dce5eb';ctx.fillRect(lx+4,ly-20,30,30);ctx.drawImage(photo,lx+4,ly-20,30,30);ctx.restore();}ctx.fillStyle=color;ctx.fillText(label,lx+40,ly);
  });
- const units=Math.max(.5,Math.floor(110/g.scale*2)/2);ctx.strokeStyle='#e5ece0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(135,h-55);ctx.lineTo(135+units*g.scale,h-55);ctx.stroke();ctx.font='14px Arial';ctx.fillStyle='#edf1e9';ctx.fillText(`${units} source units · shared scale`,135,h-42);ctx.textAlign='right';ctx.fillText(`ELAPSED ${elapsed.toFixed(2)} s · NO FRAME INTERPOLATION`,w-130,h-12);ctx.textAlign='left';
+ ctx.fillStyle='#08101deb';ctx.fillRect(w-245,62,182,86);ctx.fillStyle='#e42a43';ctx.fillRect(w-245,62,5,86);ctx.fillStyle='#aebfd1';ctx.font='bold 12px Arial';ctx.fillText('COMBINE ELAPSED',w-228,82);ctx.fillStyle='#ffffff';ctx.font='bold 46px Arial';ctx.fillText(elapsed.toFixed(2),w-228,129);ctx.font='bold 12px Arial';ctx.fillText('SEC',w-104,128);
+ const units=Math.max(.5,Math.floor(110/g.scale*2)/2);ctx.fillStyle='#10271fee';ctx.fillRect(124,h-95,280,42);ctx.strokeStyle='#e5ece0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(135,h-80);ctx.lineTo(135+units*g.scale,h-80);ctx.stroke();ctx.font='14px Arial';ctx.fillStyle='#edf1e9';ctx.fillText(`${units} source units · shared scale`,135,h-65);ctx.textAlign='right';ctx.fillText(`ELAPSED ${elapsed.toFixed(2)} s · NO FRAME INTERPOLATION`,w-130,h-12);ctx.textAlign='left';
 }
 export function drawSeries(canvas,tracks,elapsed,duration){
  const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;ctx.fillStyle='#10191b';ctx.fillRect(0,0,w,h);

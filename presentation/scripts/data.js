@@ -1,9 +1,10 @@
+import {namePortrait} from './portraits.js';
 export const esc = value => String(value ?? '—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const fmt = (x,n=2) => Number.isFinite(x) ? x.toLocaleString('en-US',{maximumFractionDigits:n,minimumFractionDigits:n}) : '—';
 export const count = x => Number.isFinite(Number(x)) ? Number(x).toLocaleString('en-US') : '—';
 export const pct = x => Number.isFinite(x) ? `${fmt(x*100,1)}%` : '—';
 export function stat(value,label){return `<div class="stat"><b>${value}</b><span>${label}</span></div>`;}
-export function table(rows,keys){return `<div class="table-wrap"><table><thead><tr>${keys.map(k=>`<th>${esc(k.replaceAll('_',' '))}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${keys.map(k=>`<td>${esc(r[k])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
+export function table(rows,keys){return `<div class="table-wrap"><table><thead><tr>${keys.map(k=>`<th>${esc(k.replaceAll('_',' '))}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${keys.map(k=>`<td>${k==='player'||k==='display_name'?`<span class="table-player">${namePortrait(r[k])}${esc(r[k])}</span>`:esc(r[k])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
 async function json(file){const response=await fetch(`../outputs/presentation/${file}`,{cache:'no-store'});if(!response.ok)throw Error(`${file}: HTTP ${response.status}`);return response.json();}
 export async function loadResearch(){const d=await json('briefing.json');if(d.schema_version!==2||!d.featured_attempts?.length)throw Error('Analysis incomplete: rebuild the presentation export');return d;}
 let catalog,appendix;
