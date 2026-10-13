@@ -1,4 +1,4 @@
-/* Field markings provide football context, not an inferred Combine field location. */
+/* Actual Combine traces on a practice board; illustrative grid/equipment only. */
 export const ATHLETE_COLORS=['#ffffff','#f2c94c'];
 export function geometry(tracks,width=1200,height=580){
  const points=tracks.flatMap(t=>t.frames.map(f=>[f[1]-t.frames[0][1],f[2]-t.frames[0][2]]));
@@ -13,22 +13,16 @@ export function observedFrame(track,elapsed){
  return index;
 }
 function field(ctx,w,h){
- ctx.fillStyle='#183b2c';ctx.fillRect(0,0,w,h);
- const left=36,right=w-36,top=34,bottom=h-34,goalLeft=112,goalRight=w-112,step=(goalRight-goalLeft)/10;
- for(let i=0;i<10;i++){ctx.fillStyle=i%2?'#1c4332':'#234c39';ctx.fillRect(goalLeft+i*step,top,step,bottom-top);}
- ctx.fillStyle='#102e24';ctx.fillRect(left,top,goalLeft-left,bottom-top);ctx.fillRect(goalRight,top,right-goalRight,bottom-top);
- ctx.strokeStyle='#d5e0d4';ctx.lineWidth=2;ctx.strokeRect(left,top,right-left,bottom-top);
- for(let i=0;i<=10;i++){
-  const x=goalLeft+i*step;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();
-  if(i>0&&i<10){let n=i<=5?i*10:(10-i)*10;ctx.font='bold 24px Arial';ctx.fillStyle='#c4d2c2';ctx.textAlign='center';ctx.fillText(n,x+24,top+43);ctx.save();ctx.translate(x-24,bottom-43);ctx.rotate(Math.PI);ctx.fillText(n,0,0);ctx.restore();}
-  if(i<10)for(let j=1;j<5;j++){
-   const hx=x+step*j/5;ctx.beginPath();
-   [[top,top+12],[bottom-12,bottom],[h*.43,h*.43+12],[h*.57-12,h*.57]].forEach(([y1,y2])=>{ctx.moveTo(hx,y1);ctx.lineTo(hx,y2)});ctx.lineWidth=1.5;ctx.stroke();ctx.lineWidth=2;
-  }
- }
- ctx.font='bold 18px Arial';ctx.fillStyle='#b7c8b7';ctx.textAlign='center';
- [['COMBINE',74],['RESEARCH',w-74]].forEach(([word,x])=>{ctx.save();ctx.translate(x,h/2);ctx.rotate(-Math.PI/2);ctx.fillText(word,0,0);ctx.restore()});
- ctx.textAlign='left';ctx.font='16px Arial';ctx.fillStyle='#e4ece3';ctx.fillText('SCHEMATIC FIELD / COMBINE COORDINATES',38,22);
+ ctx.fillStyle='#173b2f';ctx.fillRect(0,0,w,h);
+ ctx.fillStyle='#1e4435';ctx.fillRect(35,40,w-70,h-80);
+ ctx.strokeStyle='#dce8df22';ctx.lineWidth=1;
+ for(let x=70;x<w-35;x+=55){ctx.beginPath();ctx.moveTo(x,60);ctx.lineTo(x,h-60);ctx.stroke();}
+ for(let y=65;y<h-40;y+=55){ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-55,y);ctx.stroke();}
+ ctx.strokeStyle='#dce8df77';ctx.lineWidth=2;ctx.strokeRect(35,40,w-70,h-80);
+ // Equipment symbols indicate a practice setting, not surveyed cone locations.
+ [[65,75],[w-65,75],[65,h-75],[w-65,h-75]].forEach(([x,y])=>{ctx.fillStyle='#ed8a45';ctx.beginPath();ctx.moveTo(x,y-12);ctx.lineTo(x+11,y+8);ctx.lineTo(x-11,y+8);ctx.closePath();ctx.fill();ctx.fillRect(x-14,y+8,28,3);});
+ ctx.fillStyle='#e8efea';ctx.font='bold 18px Arial';ctx.textAlign='left';ctx.fillText('COMBINE / PRACTICE DRILL DIAGRAM',38,25);
+ ctx.font='13px Arial';ctx.fillStyle='#b8cdbf';ctx.textAlign='right';ctx.fillText('GRID & CONES ILLUSTRATIVE / NOT MEASURED PLACEMENT',w-40,25);ctx.textAlign='left';
 }
 export function drawField(canvas,tracks,elapsed,{ghost=false,encoding='athlete',focus=false,only=null}={}){
  const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;field(ctx,w,h);

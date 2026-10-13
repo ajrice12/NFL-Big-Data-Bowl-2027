@@ -1,6 +1,6 @@
-# The 3-Second Problem
+# The Pass-Protection Test
 
-Can Combine movement mechanics reveal which offensive linemen sustain pass protection under pressure?
+Does Combine mirror recovery improve prediction of overall rookie pressure allowed beyond traditional tests?
 
 A local research presentation, movement laboratory, and reproducible analysis for
 NFL Big Data Bowl 2027. The public [GitHub repository](https://github.com/ajrice12/NFL-Big-Data-Bowl-2027)
@@ -23,42 +23,38 @@ raw CSV requests. Opening HTML by double-clicking does not provide the HTTP
 module/data loading the app needs. The old inline-preview scripts are archived
 under `scripts/legacy/` and are not the application entry point.
 
-The default view is a five-scene football story: **The football problem,
-Player Film, Measure the reset, NFL findings, and Scouting implications**.
-A short title sequence introduces the question with **Watch the Breakdown** as
-the main action. Back, Next and Skip to Results guide a self-paced briefing of
-about 60-90 seconds. There is no mandatory loading sequence.
+The default story follows **blocking question, verified finding, the timing
+distinction, Combine hypothesis, and scouting implications**. The opening uses
+an explicitly illustrative OL/rusher/QB diagram. One click reveals the main
+finding: mirror recovery has not demonstrated added pressure-rate prediction.
 
-Player Film opens a verified O'Cyrus Torrence mirror attempt without filters.
-The first recorded direction change receives a brief quarter-speed replay and
-annotation; the clock still shows source time. Compare Players lazily loads
-Steve Avila into synchronized split fields. Play/pause, replay and scrubbing
-remain available. The reset scene reveals the first-event 0.60-second delay
-only once its target is reached. These prespecified guard examples were selected
-without NFL outcomes and are descriptive illustrations.
+The model predicts **overall rookie pressure-allowed rate**, not protection
+lasting three seconds. Three seconds is a descriptive checkpoint: pressure by
+then, observed clean through then, or an earlier pressure-free ending with an
+unknown three-second outcome. The presentation separates those groups and their
+player-play denominators. Clean through the checkpoint can include later pressure.
+See [the scientific assessment](docs/scientific_story_assessment.md) for the title
+change, outcome audit, limitations and a separate future-study proposal.
 
-**Research Tools** retains all five analytical workspaces: Overview, Player
-movement, How the metric works, Findings, and NFL application. Filters, drills,
-trail encodings, the time series, 15/20/25% targets, the data appendix, all nine
-methodology steps, model comparisons, uncertainty, sensitivity and diagnostics
-remain available. OL pressure-rate and receiver-separation experiments stay
-separate. No research algorithm or fitted model was changed.
+Player Film connects the recovery hypothesis to reacting to a rush move. Actual
+Combine coordinates appear on an illustrative practice-drill board, not a game
+field. No opponent/contact tracking or measured equipment placement is invented.
+Torrence and Avila are prespecified guard illustrations selected without NFL
+outcomes. Comparison, quarter-speed reversal, play/pause, replay and scrubbing
+remain available. The mathematical measurement replay is optional.
 
-Field markings are **schematic**, not recorded NFL field placement. Coordinate
-units remain unverified. The source-unit scale and shared isotropic mapping
-preserve geometry; starts are translated, never rotated or interpolated. Gaps
-break trails. The primary OL model predicts any-pressure rate, rather than
-survival through three seconds. It does not validate a movement score.
+**Research Tools** retains all five analytical workspaces, drill/player filters,
+trail encodings, time series, 15/20/25% targets, local data appendix, all nine
+methodology steps, model comparisons, uncertainty and diagnostics. OL pressure
+rate and receiver separation remain separate. No fitted model or scientific
+algorithm changed. Coordinate units and body orientation remain unverified;
+mapping preserves isotropic scale, translates starts and never interpolates gaps.
 
-Startup reads the 24.8 KB briefing and **one** featured attempt. Other athletes,
-the catalog and samples load on demand. Fonts are served locally with their
-SIL Open Font Licenses; see `presentation/assets/README.md`. The header uses a
-typographic NFL fallback and an independent-research label. Reduced motion
-disables automatic playback and transitions. Existing research hash links work.
-
-`tests/story-browser.cjs` verifies the guided experience and
-`tests/browser.cjs` retains the complete research browser regression suite.
-Latest screenshots and reports are local in `outputs/verification/v3/`.
+Startup reads the compact briefing and preloads one featured attempt. Additional
+athletes, catalog and samples load on demand. Fonts and their licenses are local.
+Reduced motion disables automatic playback and transitions. Existing research
+hash URLs work. Browser tests: `tests/story-browser.cjs` and `tests/browser.cjs`.
+Latest screenshots/reports: `outputs/verification/question-review/`.
 
 ## Setup and reproduce
 

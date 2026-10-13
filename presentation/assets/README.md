@@ -8,7 +8,7 @@ and copyright notices are included beside its binary in `fonts/`.
 - [Oswald variable](https://github.com/google/fonts/tree/main/ofl/oswald): upstream `Oswald[wght].ttf`, locally named `Oswald-wght.ttf`; `oswald-OFL.txt`.
 - [Inter variable](https://github.com/google/fonts/tree/main/ofl/inter): upstream `Inter[opsz,wght].ttf`, locally named `Inter-opsz-wght.ttf`; `inter-OFL.txt`.
 
-The original code-drawn field uses no downloaded broadcast footage, logos,
+The original practice-drill board and conceptual blocking diagrams use no downloaded broadcast footage, logos,
 photographs or reference-image assets. NFL is plain text in the header. The
 official shield was not included: permission for this deployment has not been
 established, and the [NFL terms](https://www.nfl.com/legal/terms/) require express

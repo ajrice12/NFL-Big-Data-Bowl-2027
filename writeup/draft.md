@@ -1,6 +1,6 @@
-# The 3-Second Problem
+# The Pass-Protection Test
 
-**Can Combine movement mechanics reveal which offensive linemen sustain pass protection under pressure?**
+**Does Combine mirror recovery add information when predicting overall rookie pressure allowed?**
 
 ## Research question
 
@@ -9,7 +9,7 @@ Mirror drills expose transitions: moving, reversing, and recovering displacement
 We investigate whether an exploratory recovery feature adds predictive information
 about rookie offensive-line pressure rates beyond traditional tests. We also
 preserve an existing, separate receiver-separation experiment. Neither experiment
-establishes a validated scouting score.
+establishes a validated scouting score. The OL target is overall pressure-allowed rate, not protection lasting three seconds.
 
 ## Data and feasibility
 

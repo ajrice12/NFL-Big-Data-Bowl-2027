@@ -79,3 +79,16 @@ checks pass. The final runs have no normal-load script or asset failures.
 Source-export verification again confirms 480 attempts and five evidence
 objects. Screenshots and reports: `outputs/verification/v3/`. Full review and
 launch instructions: `docs/v3_review.md`. Research algorithms are unchanged.
+
+
+## Scientific question and viewer review (current)
+
+The presentation is now The Pass-Protection Test. This supersedes V3's title
+and guided scene order; the research remains unchanged. The initial assessment
+is in `docs/scientific_story_assessment.md`. The outcome audit reproduces all
+23,768 player-play opportunities and their disjoint checkpoint categories.
+63 story checks plus 64 research checks pass. Requested 1440x900 and 1366x768
+screenshots were reviewed. The sixty-second comprehension judgment is editorial,
+not a participant study. See `docs/question_review_verification.md` and local
+`outputs/verification/question-review/` screenshots/reports. All 480 exported
+trajectories still match processed source data.

@@ -1,7 +1,7 @@
 /* Start scripts.serve first. PLAYWRIGHT_MODULE_PATH may point to an existing install. */
 const fs=require('node:fs'),path=require('node:path');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE_PATH||'playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'outputs/verification/v3/research-regression');fs.mkdirSync(out,{recursive:true});
+const root=path.resolve(__dirname,'..'),out=path.join(root,'outputs/verification/question-review/research-regression');fs.mkdirSync(out,{recursive:true});
 const base=process.env.PRESENTATION_URL||'http://127.0.0.1:8765/presentation/';
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.BROWSER_EXECUTABLE||'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',headless:true});
